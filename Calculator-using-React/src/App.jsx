@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './App.css';
 
-function App() {
-  const [allBtnClicked, setallBtnClicked] = useState('');
+const App = () => {
+  const [allBtnClicked, setAllbtnClicked] = useState('');
+
   const handleclick = (event) => {
     console.log(event.target.value);
     let strBtn = event.target.value;
@@ -13,77 +15,264 @@ function App() {
         symbols.includes(newSettingString[i]) &&
         symbols.includes(newSettingString[i + 1])
       ) {
+        console.log('inside if');
         newSettingString = newSettingString.slice(0, -1);
-        alert('Two symbols cannot be together');
+        alert('No two symbols can be together');
       }
     }
+
     let exampleNum = newSettingString;
     let numString = '123456789';
-    for (elt i = 0;i<exampleNum.lenght;i++){
-      if(!symbols.includes(exampleNum[i])&&!symbols.includes(exampleNum[i+1])){
-        
+    for (let i = 0; i < exampleNum.length; i++) {
+      if (
+        !symbols.includes(exampleNum[i]) &&
+        !symbols.includes(exampleNum[i + 1])
+      ) {
+        if (
+          (exampleNum[i] == '0' && numString.includes(exampleNum[i + 1])) ||
+          exampleNum[i + 1] == '0'
+        ) {
+          let add = '';
+          let flag = false;
+          for (let j = 0; j < exampleNum.length; j++) {
+            if (j !== i) {
+              add += exampleNum[j];
+              flag = true;
+            }
+          }
+
+          if (flag) {
+            exampleNum = add;
+            break;
+          }
+        }
       }
     }
+    setAllbtnClicked(exampleNum);
   };
+
+  const handleClickDelete = () => {
+    let newStr = allBtnClicked.slice(0, -1);
+    console.log(newStr);
+    setAllbtnClicked(newStr);
+  };
+
   return (
-    <div>
-      <div>
-        <button value="AC" onClick={handleclick}>
+    <div className="container">
+      <div className="calc-display">{allBtnClicked}</div>
+      <div className="calc-btn">
+        <button
+          value="ac"
+          onClick={() => setAllbtnClicked('')}
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
           AC
         </button>
-        <button value="DEL" onClick={handleclick}>
-          DEL
+        <button
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+          onClick={() => {
+            handleClickDelete();
+            console.log('delete last number');
+          }}
+          value="del"
+        >
+          Del
         </button>
-        <button value="1" onClick={handleclick}>
-          1
-        </button>
-        <button value="2" onClick={handleclick}>
-          2
-        </button>
-        <button value="3" onClick={handleclick}>
-          3
-        </button>
-        <button value="4" onClick={handleclick}>
-          4
-        </button>
-        <button value="5" onClick={handleclick}>
-          5
-        </button>
-        <button value="6" onClick={handleclick}>
-          6
-        </button>
-        <button value="7" onClick={handleclick}>
-          7
-        </button>
-        <button value="8" onClick={handleclick}>
-          8
-        </button>
-        <button value="9" onClick={handleclick}>
-          9
-        </button>
-        <button value="0" onClick={handleclick}>
-          0
-        </button>
-        <button value="+" onClick={handleclick}>
+        <button
+          onClick={handleclick}
+          value="+"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
           +
         </button>
-        <button value="-" onClick={handleclick}>
+        <button
+          onClick={handleclick}
+          value="1"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          1
+        </button>
+        <button
+          onClick={handleclick}
+          value="2"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          2
+        </button>
+        <button
+          onClick={handleclick}
+          value="3"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          3
+        </button>
+        <button
+          onClick={handleclick}
+          value="4"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          4
+        </button>
+        <button
+          onClick={handleclick}
+          value="5"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          5
+        </button>
+        <button
+          onClick={handleclick}
+          value="6"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          6
+        </button>
+        <button
+          onClick={handleclick}
+          value="7"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          7
+        </button>
+        <button
+          onClick={handleclick}
+          value="8"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          8
+        </button>
+        <button
+          onClick={handleclick}
+          value="9"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          9
+        </button>
+        <button
+          onClick={handleclick}
+          value="0"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          0
+        </button>
+        <button
+          onClick={handleclick}
+          value="-"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
           -
         </button>
-        <button value="*" onClick={handleclick}>
-          *
-        </button>
-        <button value="/" onClick={handleclick}>
+        <button
+          onClick={handleclick}
+          value="/"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
           /
         </button>
-        <button value="." onClick={handleclick}>
-          .
+        <button
+          onClick={handleclick}
+          value="*"
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          *
         </button>
-        <button value="=" onClick={handleclick}>
+        <button
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+          onClick={() => {
+            let evalAns = eval(allBtnClicked).toString();
+            console.log(evalAns);
+            if (evalAns == 'NaN') {
+              setAllbtnClicked('Not a Number');
+            } else {
+              setAllbtnClicked(evalAns);
+            }
+          }}
+          value="="
+        >
           =
+        </button>
+        <button
+          onClick={handleclick}
+          value="."
+          style={{
+            borderRadius: '15px',
+            width: '40px',
+            backgroundColor: 'beige',
+          }}
+        >
+          .
         </button>
       </div>
     </div>
   );
-}
+};
+
 export default App;
